@@ -1,0 +1,90 @@
+<list>
+  <listaAsignaturas>
+    <Nombre>Programacion</Nombre>
+    <ID>1</ID>
+    <ListaAlumnos>
+      <Alumno>
+        <nombre>Mario</nombre>
+        <Apellido>Zaton</Apellido>
+        <FechaNac>2001-08-02</FechaNac>
+        <DNI>72756384R</DNI>
+        <Direccion>Senda valentin de foronda</Direccion>
+        <CodigoPostal>01010</CodigoPostal>
+        <Telefono>661322115</Telefono>
+        <Email>mario.zaton@ikasle.egibide.org</Email>
+        <Fecha__Alta>2022-06-22</Fecha__Alta>
+        <asigDeAlum/>
+      </Alumno>
+      <Alumno>
+        <nombre>Juan</nombre>
+        <Apellido>Da Silva</Apellido>
+        <FechaNac>2001-05-22</FechaNac>
+        <DNI>72796384T</DNI>
+        <Direccion>Calle Bapo</Direccion>
+        <CodigoPostal>01013</CodigoPostal>
+        <Telefono>661435677</Telefono>
+        <Email>juan.dasilva@ikasle.egibide.org</Email>
+        <Fecha__Alta>2022-06-18</Fecha__Alta>
+        <asigDeAlum/>
+      </Alumno>
+      <Alumno>
+        <nombre>Alejandro</nombre>
+        <Apellido>Perez</Apellido>
+        <FechaNac>1999-03-12</FechaNac>
+        <DNI>72726384L</DNI>
+        <Direccion>La GLOW</Direccion>
+        <CodigoPostal>01012</CodigoPostal>
+        <Telefono>661678543</Telefono>
+        <Email>alejandro.perez@ikasle.egibide.org</Email>
+        <Fecha__Alta>2022-06-08</Fecha__Alta>
+        <asigDeAlum/>
+      </Alumno>
+      <Alumno>
+        <nombre>Ivan</nombre>
+        <Apellido>Villagra</Apellido>
+        <FechaNac>1997-04-25</FechaNac>
+        <DNI>92756384C</DNI>
+        <Direccion>El Bule</Direccion>
+        <CodigoPostal>01015</CodigoPostal>
+        <Telefono>66121223</Telefono>
+        <Email>ivan.villagra@ikasle.egibide.org</Email>
+        <Fecha__Alta>2022-06-12</Fecha__Alta>
+        <asigDeAlum/>
+      </Alumno>
+      <Alumno>
+        <nombre>Guillermo</nombre>
+        <Apellido>Jabato</Apellido>
+        <FechaNac>2000-07-06</FechaNac>
+        <DNI>74756377F</DNI>
+        <Direccion>Cerca de Juan</Direccion>
+        <CodigoPostal>01013</CodigoPostal>
+        <Telefono>66189855</Telefono>
+        <Email>guillermo.jabato@ikasle.egibide.org</Email>
+        <Fecha__Alta>2022-06-12</Fecha__Alta>
+        <asigDeAlum/>
+      </Alumno>
+      <Alumno>
+        <nombre>Enzo</nombre>
+        <Apellido>Gil</Apellido>
+        <FechaNac>2000-11-10</FechaNac>
+        <DNI>72637475T</DNI>
+        <Direccion>Casa enzo</Direccion>
+        <CodigoPostal>01010</CodigoPostal>
+        <Telefono>945965949</Telefono>
+        <Email>enzo@gmail.com</Email>
+        <Fecha__Alta>2022-09-10</Fecha__Alta>
+        <asigDeAlum/>
+      </Alumno>
+    </ListaAlumnos>
+  </listaAsignaturas>
+  <listaAsignaturas>
+    <Nombre>Acceso a datos</Nombre>
+    <ID>2</ID>
+    <ListaAlumnos reference="../../listaAsignaturas/ListaAlumnos"/>
+  </listaAsignaturas>
+  <listaAsignaturas>
+    <Nombre>EIE</Nombre>
+    <ID>3</ID>
+    <ListaAlumnos reference="../../listaAsignaturas/ListaAlumnos"/>
+  </listaAsignaturas>
+</list>
