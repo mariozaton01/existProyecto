@@ -4,6 +4,7 @@ package Controlador;/*
  * and open the template in the editor.
  */
 import Clases.Alumno;
+import Clases.Asignatura;
 import Excepciones.formatoIncorrecto;
 import Exist.ExistDb;
 import Ventanas.*;
@@ -278,6 +279,23 @@ public class Controlador {
 
 
     }
+
+    public static ArrayList<Asignatura> verAsigDeAlumno(int selectedIndex) {
+        ArrayList<Alumno> listaAlum = ExistDb.getListaAlumnos();
+        Alumno alum = listaAlum.get(selectedIndex);
+        ArrayList<Asignatura> listaAsig  = ExistDb.getAsignaturasDeAlumno(alum.getDNI());
+
+        return  listaAsig;
+
+    }
+
+    /*public static void AsignaturasToComboBox(ArrayList<Asignatura> asignaturas, JComboBox<String> comboBox) {
+
+        for (Asignatura asig: asignaturas) {
+            System.out.println(asig.getNombre());
+            comboBox.addItem(asig.getNombre());
+        }
+    }*/
 }
 
 

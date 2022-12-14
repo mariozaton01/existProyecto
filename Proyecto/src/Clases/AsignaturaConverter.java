@@ -27,10 +27,12 @@ public class AsignaturaConverter implements Converter {
 
         writer.startNode("ID");
         writer.setValue(String.valueOf(asignatura.getID()) );
+        writer.endNode();
+
         writer.startNode("Nombre");
         writer.setValue(asignatura.getNombre());
         writer.endNode();
-        writer.startNode("Lista_alumnos");
+        writer.startNode("ListaAlumnos");
         if(asignatura.getAlumnosPorAsig() != null){
             for(Alumno alum : asignatura.getAlumnosPorAsig()){
                 writer.startNode("Alumno");
@@ -58,7 +60,8 @@ public class AsignaturaConverter implements Converter {
                             UnmarshallingContext context) {
         try{
             Asignatura asignatura = new Asignatura();
-            //dni
+
+            //id
             reader.moveDown();
             asignatura.setID(Integer.parseInt(reader.getValue().trim()));
             reader.moveUp();
@@ -67,29 +70,28 @@ public class AsignaturaConverter implements Converter {
             asignatura.setNombre(reader.getValue());
             reader.moveUp();
             //arraylist
-            reader.moveDown();
-
-            while(reader.hasMoreChildren()){
-                Alumno alum = new Alumno();
-                //Objeto alumno
                 reader.moveDown();
-                reader.moveDown();//dni
-                alum.setDNI(reader.getValue());
+
+                while(reader.hasMoreChildren()){
+                    Alumno alum = new Alumno();
+                    //Objeto alumno
+                    reader.moveDown();
+                    reader.moveDown();//dni
+                    alum.setDNI(reader.getValue());
+                    reader.moveUp();
+                    reader.moveDown();//nombre
+                    alum.setNombre(reader.getValue());
+                    reader.moveUp();
+                    reader.moveDown();//apellido
+                    alum.setApellido(reader.getValue());
+                    reader.moveUp();
+
+                    reader.moveUp();//acabamos Alumno
+                    asignatura.setAlumno(alum);
+
                 reader.moveUp();
-                reader.moveDown();//nombre
-                alum.setNombre(reader.getValue());
-                reader.moveUp();
-                reader.moveDown();//apellido
-                alum.setApellido(reader.getValue());
-                reader.moveUp();
-
-                reader.moveUp();//acabamos Alumno
-                asignatura.setAlumno(alum);
-
-
-            }
-            reader.moveUp();
-
+                }
+            System.out.println(asignatura);
             return asignatura;
         }catch(Exception e){
             System.out.println("Ha ocurrido un error al convertir la asignatura " + e.getMessage());

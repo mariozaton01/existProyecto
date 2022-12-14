@@ -23,7 +23,8 @@ public class ExistDb {
     static String driver = "org.exist.xmldb.DatabaseImpl"; //Driver para eXist
     static String URI = "xmldb:exist://localhost:8080/exist/xmlrpc/db/proyecto"; //URI colección
     static String usu = "admin"; //Usuario
-    static String usuPwd = ""; //Clave
+    static String usuPwd = "12345Abcde"; //Clave
+    //static String usuPwd = ""; //Clave casa
     static Collection col = null;
 
     public static Collection con() {
@@ -130,7 +131,7 @@ public class ExistDb {
                     //insertamos las asignaturas
                     XPathQueryService servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
                     //Consulta para insertar --> update insert ... into
-                    ResourceSet result = servicio.query("update insert " + stream.toXML(asig) + " into /Asignaturas");
+                    servicio.query("update insert " + stream.toXML(asig) + " into /Asignaturas");
                 }
 
                 col.close(); //borramos
@@ -158,7 +159,7 @@ public class ExistDb {
                 XPathQueryService servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
                 //Consulta para insertar --> update insert ... into
                 ResourceSet result = servicio.query("update insert " + stream.toXML(alum) + " into /Alumnos");
-                servicio.query("update insert"+ stream.toXML(alum) +"into /Asignaturas/Asignatura/Lista_alumnos");
+                servicio.query("update insert"+ stream.toXML(alum) +"into /Asignaturas/Asignatura/ListaAlumnos");
                 col.close(); //borramos
             } catch (Exception e) {
                 System.out.println("Error al insertar alumno.");
@@ -186,7 +187,6 @@ public class ExistDb {
                 if (i.hasMoreResources()) {
                     while (i.hasMoreResources()) {
                         Resource r = i.nextResource();
-                        System.out.println(r.getContent());
                         listaAlum.add((Alumno) stream.fromXML((String) r.getContent()) );
                     }
                 }
@@ -207,8 +207,8 @@ public class ExistDb {
                 try {
                     XPathQueryService servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
                     //Consulta para borrar un departamento --> update delete
-                    ResourceSet result = servicio.query("update delete /Alumnos/Alumno[DNI=" + dni + "]");//todo revisar fallo delete
-                    servicio.query( "update delete /Asignaturas/Asignatura/Lista_alumnos/Alumno[DNI=" + dni + "]");
+                    servicio.query("update delete /Alumnos/Alumno[DNI='" + dni + "']");//todo revisar fallo delete
+                    servicio.query( "update delete /Asignaturas/Asignatura/ListaAlumnos/Alumno[DNI='" + dni + "']");
                     col.close();
                 } catch (Exception e) {
                     System.out.println("Error al borrar.");
@@ -224,8 +224,8 @@ public class ExistDb {
             try {
                 XPathQueryService servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
                 //Consulta para borrar un departamento --> update delete
-                ResourceSet result = servicio.query("update delete /Alumnos/Alumno[DNI=" + dni + "]");
-                servicio.query( "update delete /Asignaturas/Asignatura[ID = "+idAsignatura +"]/Lista_alumnos/Alumno[DNI= " + dni + "]");
+                ResourceSet result = servicio.query("update delete /Alumnos/Alumno[DNI='" + dni + "']");
+                servicio.query( "update delete /Asignaturas/Asignatura[ID = "+idAsignatura +"]/ListaAlumnos/Alumno[DNI= '" + dni + "']");
                 col.close();
             } catch (Exception e) {
                 System.out.println("Error al borrar.");
@@ -234,6 +234,45 @@ public class ExistDb {
         } else {
             System.out.println("Error en la conexión. Comprueba datos.");
         }
+    }
+
+    public static ArrayList<Asignatura> getAsignaturasDeAlumno(String dni) {
+        ArrayList<Asignatura> listaAsig = new ArrayList<Asignatura>();
+
+        if (con() != null) {
+            try {
+
+                XPathQueryService servicio;
+                servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
+                //Preparamos la consulta
+                ResourceSet result = servicio.query("/Asignaturas/Asignatura[ListaAlumnos/Alumno/DNI ='"+dni+"']");
+
+                // recorrer los datos del recurso.
+                ResourceIterator i;
+
+                i = result.getIterator();
+                if (i.hasMoreResources()) {
+                    while (i.hasMoreResources()) {
+                        XStream stream = Asignatura.streamConverter();
+                        Resource r = i.nextResource();
+
+                        listaAsig.add((Asignatura) stream.fromXML((String) r.getContent()) );
+                        System.out.println("ooo" + listaAsig.get(0));
+
+                    }
+                }
+
+                col.close();
+                return listaAsig;
+
+            } catch (XMLDBException e) {
+                System.out.println(" ERROR"+ e.getMessage());
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Error en la conexión. Comprueba datos.");
+        }
+        return listaAsig;
     }
 }
 

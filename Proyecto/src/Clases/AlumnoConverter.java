@@ -25,6 +25,8 @@ public  class AlumnoConverter implements Converter {
 
         writer.startNode("DNI");
         writer.setValue(alum.getDNI());
+        writer.endNode();
+
         writer.startNode("Nombre");
         writer.setValue(alum.getNombre());
         writer.endNode();
@@ -36,12 +38,20 @@ public  class AlumnoConverter implements Converter {
         writer.endNode();
         writer.startNode("Direccion");
         writer.setValue(String.valueOf(alum.getDireccion()));
+        writer.endNode();
+
         writer.startNode("CP");
         writer.setValue(String.valueOf(alum.getCodigoPostal()));
+        writer.endNode();
+
         writer.startNode("Telefono");
         writer.setValue(String.valueOf(alum.getTelefono()));
+        writer.endNode();
+
         writer.startNode("Email");
         writer.setValue(String.valueOf(alum.getEmail()));
+        writer.endNode();
+
         writer.startNode("Fecha_alta");
         writer.setValue(String.valueOf(alum.getFecha_Alta()));
         writer.endNode();

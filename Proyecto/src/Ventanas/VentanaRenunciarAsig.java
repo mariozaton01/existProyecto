@@ -235,14 +235,14 @@ public class VentanaRenunciarAsig extends javax.swing.JFrame {
     }
     public void reasignarAsig(){
         cbAsignatura.removeAllItems();
-        ArrayList<Asignatura> asigDeAlumno = new ArrayList<>();
+        ArrayList<Asignatura> asigDeAlumno = new ArrayList<Asignatura>();
         try {
-            // TODO add your handling code here:
-            asigDeAlumno = AsignaturasRelated.verAsigDeAlumno(cbAlumno.getSelectedIndex());
+            asigDeAlumno = Controlador.verAsigDeAlumno(cbAlumno.getSelectedIndex());
+            //Controlador.AsignaturasToComboBox(asigDeAlumno,cbAsignatura);
+
         } catch (Exception ex) {
             System.out.print(ex.getMessage());
         }
-        AsignaturasRelated.AsignaturasToComboBox(asigDeAlumno,cbAsignatura);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
